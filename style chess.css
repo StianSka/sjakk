@@ -1,0 +1,47 @@
+.boardContainer{
+    display: flex;
+    justify-content: center;
+}
+.board {
+    display: grid;
+    width: 520px;
+    grid-template-columns: repeat(8, 65px);
+    grid-template-rows: repeat(8, 65px);
+    border-color: black;
+    border-style: solid;
+}
+
+.chessSquare{
+    display: grid;
+    align-items: end;
+    border-color: black;
+    border-style: solid;
+}
+
+.customeizeBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: #000000;
+    border-style: solid;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+.whosTurn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: #000000;
+    border-style: solid;
+    padding: 8px;
+    margin-bottom: 15px;
+
+}
+
+.piece{
+    position: absolute;
+    z-index: 2;
+    height: 65px;
+    width: 65px;
+    
+}
