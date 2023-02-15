@@ -1,13 +1,3 @@
-function findCurrentPosisonIndex(currentPos) {
-    let index = 0
-    for (let i = 0; i < model.board.length; i++) {
-        if (model.board[i].id == currentPos) {
-            index = i
-        }
-    }
-    return index
-}
-
 function horizontalMoveRight(currentPos, color) {
     let boardPosIndex = findCurrentPosisonIndex(currentPos)
     let hasHitPieceRight = false

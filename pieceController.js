@@ -74,5 +74,30 @@ function getPieceType() {
 }
 
 
+function checkForPiece(index) {
+    if (model.board[index].currentPiece == '') { return false }
+    else { return true }
+}
+
+function getPieceCollor(index) {
+    if (model.board[index].currentPiece.includes('white') == true) { return 'white' }
+    else { return 'black' }
+}
+
+function checkPieceColor() {
+    return model.inputs.currentlyMovingPiece.color
+}
+
+function findCurrentPosisonIndex(currentPos) {
+    let index = 0
+    for (let i = 0; i < model.board.length; i++) {
+        if (model.board[i].id == currentPos) {
+            index = i
+        }
+    }
+    return index
+}
+
+
 
 

@@ -1,99 +1,72 @@
+// current bugs kan gå av brettet bør bli fikset at promotering det bør bli pkalt i movePrimedPiece()  
+// i pieceController
 function pawnMove() {
-    let pieceCollor = checkPieceColor()
-    getLegalPawnMoves(pieceCollor)
-} 
-
-function checkPieceColor() {
-    return model.inputs.currentlyMovingPiece.color
-}
-
-function getLegalPawnMoves(pieceCollor) {
-    if (pieceCollor == 'white') {
-        getlegaleWhitePawnMoves()
-    }
-    if (pieceCollor == 'black') {
-        getlegaleBlackPawnMoves()
-    }
-}
-
-function getlegaleWhitePawnMoves() {
-    let moveOnePosible = false
     let currentPos = model.inputs.currentlyMovingPiece.possison
-    let letterIndex = model.arrayLeters.indexOf(currentPos.charAt(0))
-    let numberIndex = model.arrayNumbers.indexOf(currentPos.charAt(1))
-   
-    let forwardMove = (model.arrayLeters[letterIndex] + model.arrayNumbers[(numberIndex + 1)])
-    let takeUp = (model.arrayLeters[(letterIndex - 1)] + model.arrayNumbers[(numberIndex + 1)])
-    let takeDown = (model.arrayLeters[(letterIndex + 1)] + model.arrayNumbers[(numberIndex + 1)])
+    let currentPosIndex = findCurrentPosisonIndex(currentPos)
+    if (model.inputs.currentlyMovingPiece.color == 'white') { getWhitePawnMoves(currentPosIndex) }
+    else { getBlackPawnMoves(currentPosIndex) }
+}
 
-    if (model.inputs.currentlyMovingPiece.hasMoved == false) {
-        let legalFirstMove = (model.arrayLeters[letterIndex] + model.arrayNumbers[(numberIndex + 2)])
-        for (let i = 0; i < model.board.length; i++) {
-            if (model.board[i].id == forwardMove && model.board[i].currentPiece == '') {
-                model.board[i].color = model.legalMoveSquareColor
-                moveOnePosible = true
-            }
-            if (model.board[i].id == legalFirstMove && model.board[i].currentPiece == '' && moveOnePosible == true) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeUp && model.board[i].currentPiece.includes('black')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeDown && model.board[i].currentPiece.includes('black')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-        }
-    } else {
-        for (let i = 0; i < model.board.length; i++) {
-            if (model.board[i].id == forwardMove && model.board[i].currentPiece == '') {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeUp && model.board[i].currentPiece.includes('black')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeDown && model.board[i].currentPiece.includes('black')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-        }
+function getWhitePawnMoves(currentPosIndex) {
+    whitePawnCapture(currentPosIndex)
+    if (model.inputs.currentlyMovingPiece.hasMoved == false) { whitePawnDoubleMowe(currentPosIndex) }
+    else { whitePawnSingleMowe(currentPosIndex) }
+}
+
+function whitePawnDoubleMowe(currentPosIndex) {
+    let hasHitPiece = false
+    if (checkForPiece(currentPosIndex + 1) == true) { hasHitPiece = true }
+    else { model.board[(currentPosIndex + 1)].color = model.legalMoveSquareColor }
+    if (checkForPiece(currentPosIndex + 2) == false && hasHitPiece == false) {
+        model.board[(currentPosIndex + 2)].color = model.legalMoveSquareColor
     }
 }
 
-function getlegaleBlackPawnMoves() {
-    let currentPos = model.inputs.currentlyMovingPiece.possison
-    let letterIndex = model.arrayLeters.indexOf(currentPos.charAt(0))
-    let numberIndex = model.arrayNumbers.indexOf(currentPos.charAt(1))
-   
-    let forwardMove = (model.arrayLeters[letterIndex] + model.arrayNumbers[(numberIndex - 1)])
-    let takeUp = (model.arrayLeters[(letterIndex - 1)] + model.arrayNumbers[(numberIndex - 1)])
-    let takeDown = (model.arrayLeters[(letterIndex + 1)] + model.arrayNumbers[(numberIndex - 1)])
+function whitePawnSingleMowe(currentPosIndex) {
+    if (checkForPiece(currentPosIndex + 1) == false) {
+        model.board[(currentPosIndex + 1)].color = model.legalMoveSquareColor
+    }
+}
 
-    if (model.inputs.currentlyMovingPiece.hasMoved == false) {
-        let legalFirstMove = (model.arrayLeters[letterIndex] + model.arrayNumbers[(numberIndex - 2)])
-        for (let i = 0; i < model.board.length; i++) {
-            if (model.board[i].id == forwardMove && model.board[i].currentPiece == '') {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == legalFirstMove && model.board[i].currentPiece == '' && model.board[(i+1)].currentPiece == '') {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeUp && model.board[i].currentPiece.includes('white')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeDown && model.board[i].currentPiece.includes('white')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-        }
-    } else {
-        for (let i = 0; i < model.board.length; i++) {
-            if (model.board[i].id == forwardMove && model.board[i].currentPiece == '') {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeUp && model.board[i].currentPiece.includes('white')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-            if (model.board[i].id == takeDown && model.board[i].currentPiece.includes('white')) {
-                model.board[i].color = model.legalMoveSquareColor
-            }
-        }
+function whitePawnCapture(currentPosIndex) {
+    if (checkForPiece(currentPosIndex - 7) == true &&
+        getPieceCollor(currentPosIndex - 7) != model.inputs.currentlyMovingPiece.color) {
+        model.board[(currentPosIndex - 7)].color = model.legalMoveSquareColor
+    }
+    if (checkForPiece(currentPosIndex + 9) == true &&
+        getPieceCollor(currentPosIndex + 9) != model.inputs.currentlyMovingPiece.color) {
+        model.board[(currentPosIndex + 9)].color = model.legalMoveSquareColor
+    }
+}
+
+function getBlackPawnMoves(currentPosIndex){
+    blackPawnCapture(currentPosIndex)
+    if (model.inputs.currentlyMovingPiece.hasMoved == false) { blackPawnDoubleMowe(currentPosIndex) }
+    else { blackPawnSingleMowe(currentPosIndex) }
+}
+
+function blackPawnDoubleMowe(currentPosIndex) {
+    let hasHitPiece = false
+    if (checkForPiece(currentPosIndex - 1) == true) { hasHitPiece = true }
+    else { model.board[(currentPosIndex - 1)].color = model.legalMoveSquareColor }
+    if (checkForPiece(currentPosIndex - 2) == false && hasHitPiece == false) {
+        model.board[(currentPosIndex - 2)].color = model.legalMoveSquareColor
+    }
+}
+
+function blackPawnSingleMowe(currentPosIndex) {
+    if (checkForPiece(currentPosIndex - 1) == false) {
+        model.board[(currentPosIndex - 1)].color = model.legalMoveSquareColor
+    }
+}
+
+function blackPawnCapture(currentPosIndex) {
+    if (checkForPiece(currentPosIndex - 9) == true &&
+        getPieceCollor(currentPosIndex - 9) != model.inputs.currentlyMovingPiece.color) {
+        model.board[(currentPosIndex - 9)].color = model.legalMoveSquareColor
+    }
+    if (checkForPiece(currentPosIndex + 7) == true &&
+        getPieceCollor(currentPosIndex + 7) != model.inputs.currentlyMovingPiece.color) {
+        model.board[(currentPosIndex + 7)].color = model.legalMoveSquareColor
     }
 }

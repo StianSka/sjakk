@@ -76,3 +76,4 @@ function diagonalDownLeft(currentPos, color,){
         if(model.board[i].id.charAt(1) == 1 ) {break}
     }
 }
+
