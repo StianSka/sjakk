@@ -31,12 +31,13 @@ function movePrimedPiece(divId) {
                 for (let j = 0; j < model.allInPlayPieces.length; j++) {
                     if (model.allInPlayPieces[j].id == model.inputs.currentlyMovingPiece.id) {
                         for (let k = 0; k < model.board.length; k++) {
-                            if( model.board[k].id == model.allInPlayPieces[j].possison){
+                            if (model.board[k].id == model.allInPlayPieces[j].possison) {
                                 model.board[k].currentPiece = ''
                                 model.allInPlayPieces[j].hasMoved = true
-                            } 
+                            }
                         }
                         model.allInPlayPieces[j].possison = divId
+                        if (model.board[i].currentPiece != '') { capturePiece(i) }
                         model.board[i].currentPiece = model.allInPlayPieces[j].id
                         model.inputs.currentlyMovingPiece = ''
                         applyColors()
@@ -86,6 +87,15 @@ function getPieceCollor(index) {
 
 function checkPieceColor() {
     return model.inputs.currentlyMovingPiece.color
+}
+
+function capturePiece(index) {
+    for (let i = 0; i < model.allInPlayPieces.length; i++) {
+        if (model.board[index].currentPiece == model.allInPlayPieces[i].id) {
+            model.allInPlayPieces.splice(i, 1)
+        }
+    }
+
 }
 
 function findCurrentPosisonIndex(currentPos) {

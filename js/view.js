@@ -20,10 +20,8 @@ function uppdateViewBoard() {
             <li>bonde promotion</li>
             <li>sjekk om konge er i sjakk</li>
             <li>konge moves </li>
-            <li>capture </li>
             <li>tur bytte </li>
             <li>eventuelle jukse funksjoner</li>
-            <li>noe mere farge greier disco?</li>
             <li>skrive om loops i horisontal og vertical moves</li>
     `;
     return html
