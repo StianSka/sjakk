@@ -23,7 +23,7 @@ function primePieceToMove(divId) {
         }
     }
 }
-
+// skriv om det her 
 function movePrimedPiece(divId) {
     if (model.inputs.currentlyMovingPiece != '' && model.inputs.pieceIsPrimed == false) {
         for (let i = 0; i < model.board.length; i++) {
@@ -38,12 +38,17 @@ function movePrimedPiece(divId) {
                         }
                         model.allInPlayPieces[j].possison = divId
                         if (model.allInPlayPieces[j].id.includes('pawn') == true &&
-                            divId.includes('8') == true) { primePawnPromote(j - 1) }
+                            model.allInPlayPieces[j].possison.includes('8') == true) {
+                            console.log(j)
+                            primePawnPromote(j)
+                        }
 
                         if (model.allInPlayPieces[j].id.includes('pawn') == true &&
-                            divId.includes('1') == true) { primePawnPromote(j) }
-
+                            model.allInPlayPieces[j].possison.includes('1') == true) {
+                            primePawnPromote(j)
+                        }
                         if (model.board[i].currentPiece != '') { capturePiece(i) }
+
 
                         model.board[i].currentPiece = model.allInPlayPieces[j].id
                         model.inputs.currentlyMovingPiece = ''
