@@ -14,10 +14,10 @@ function uppdateViewBoard() {
             <div class="modal-content" >
             
                 <p class="promotion-container">
-                    <button onclick="promotePawn('p queen')">Queen</button>
-                    <button onclick="promotePawn('p rook')">Rook</button>
-                    <button onclick="promotePawn('p bishop')">Bishop</button>
-                    <button onclick="promotePawn('p horse')">Horse</button>
+                    <button onclick="promotePawn('p queen', 0)">Queen</button>
+                    <button onclick="promotePawn('p rook', 1)">Rook</button>
+                    <button onclick="promotePawn('p bishop', 2)">Bishop</button>
+                    <button onclick="promotePawn('p horse', 3)">Horse</button>
                 </p>
             </div>
         </div>

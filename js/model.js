@@ -20,8 +20,19 @@ const model = {
     arrayNumbers: ['1', '2', '3', '4', '5', '6', '7', '8',],
     selectedColorBlack: '#800000',
     selectedColorWhite: 'ffffff',
-
     board: [],
+    promoteBlackImg: [
+        'img/black queen.png',
+        'img/black rook.png',
+        'img/black bishop.png',
+        'img/black horse.png',
+    ],
+    promoteWhiteImg: [
+        'img/white queen.png',
+        'img/white rook.png',
+        'img/white bishop.png',
+        'img/white horse.png',
+    ],
     allInPlayPieces: [
         {
             id: 'black king e',

@@ -96,10 +96,10 @@ function primePawnPromote(index) {
     openModal()
 }
 
-function promotePawn(toPiece) {
+function promotePawn(toPiece, imageIndex) {
     let pawn = model.allInPlayPieces[model.promotionIndex]
-    let newId = pawn.id.replace('pawn', toPiece)
-    pawn.id = newId
-    
+    pawn.id = pawn.id.replace('pawn', toPiece)
+    if (pawn.color == 'black') { pawn.imageLink = model.promoteBlackImg[imageIndex] }
+    else { pawn.imageLink = model.promoteWhiteImg[imageIndex] }
     closeModal()
 }
