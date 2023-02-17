@@ -18,3 +18,13 @@ function toogleSquareId(){
     }
     updateView()
 }
+
+function openModal() { // Endrer modal modellen så den blir vist
+    model.modal = 'block'
+    updateView()
+}
+
+function closeModal() { // Endrer modal modellen så den blir lukket
+    model.modal = 'none';
+    updateView()
+}

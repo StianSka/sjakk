@@ -37,7 +37,14 @@ function movePrimedPiece(divId) {
                             }
                         }
                         model.allInPlayPieces[j].possison = divId
+                        if (model.allInPlayPieces[j].id.includes('pawn') == true &&
+                            divId.includes('8') == true) { primePawnPromote(j - 1) }
+
+                        if (model.allInPlayPieces[j].id.includes('pawn') == true &&
+                            divId.includes('1') == true) { primePawnPromote(j) }
+
                         if (model.board[i].currentPiece != '') { capturePiece(i) }
+
                         model.board[i].currentPiece = model.allInPlayPieces[j].id
                         model.inputs.currentlyMovingPiece = ''
                         applyColors()

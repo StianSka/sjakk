@@ -90,3 +90,16 @@ function blackPawnCapture(currentPosIndex) {
         }
     }
 }
+
+function primePawnPromote(index) {
+    model.promotionIndex = index
+    openModal()
+}
+
+function promotePawn(toPiece) {
+    let pawn = model.allInPlayPieces[model.promotionIndex]
+    let newId = pawn.id.replace('pawn', toPiece)
+    pawn.id = newId
+    
+    closeModal()
+}

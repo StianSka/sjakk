@@ -10,17 +10,29 @@ function updateView() {
 function uppdateViewBoard() {
     let html = //html
         `
+        <div class="modal" style="display:${model.modal}">
+            <div class="modal-content" >
+            
+                <p class="promotion-container">
+                    <button onclick="promotePawn('p queen')">Queen</button>
+                    <button onclick="promotePawn('p rook')">Rook</button>
+                    <button onclick="promotePawn('p bishop')">Bishop</button>
+                    <button onclick="promotePawn('p horse')">Horse</button>
+                </p>
+            </div>
+        </div>
         <div class="customeizeBar">${customeColorBar()}</div>
         <div class="whosTurn">${model.colorToMove} to move</div><br>
-        <div class="boardContainer">
+        
+        <div class="board-container">
             <div class="board">${drawBoard()}</div>
         </div>
+        
             <li>det som er igjen</li>
-            <li>on pessant</li>
-            <li>bonde promotion</li>
             <li>sjekk om konge er i sjakk</li>
             <li>konge moves </li>
             <li>tur bytte </li>
+            <li>on pessant</li>
             <li>eventuelle jukse funksjoner</li>
             <li>skrive om loops i horisontal og vertical moves</li>
     `;
@@ -42,7 +54,7 @@ function drawBoard() {
 function showPieces(index) {
     let html = ``
     for (let i = 0; i < model.allInPlayPieces.length; i++) {
-        if(model.board[index].id ==  model.allInPlayPieces[i].possison ){
+        if (model.board[index].id == model.allInPlayPieces[i].possison) {
             html = `<img class="piece" src="${model.allInPlayPieces[i].imageLink}" ></img>`
         }
     }
