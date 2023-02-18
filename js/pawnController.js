@@ -91,13 +91,19 @@ function blackPawnCapture(currentPosIndex) {
     }
 }
 
-function primePawnPromote(index) {
-    model.promotionIndex = index
+function primePawnPromote(id) {
+    model.promotionId = id
     openModal()
 }
 
 function promotePawn(toPiece, imageIndex) {
-    let pawn = model.allInPlayPieces[model.promotionIndex]
+    let pawn
+
+    for (let i = 0; i < model.allInPlayPieces.length; i++) {
+        if (model.allInPlayPieces[i].id == model.promotionId) {
+            pawn = model.allInPlayPieces[i]
+        }
+    }
     pawn.id = pawn.id.replace('pawn', toPiece)
     if (pawn.color == 'black') { pawn.imageLink = model.promoteBlackImg[imageIndex] }
     else { pawn.imageLink = model.promoteWhiteImg[imageIndex] }

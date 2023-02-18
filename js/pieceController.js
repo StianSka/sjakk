@@ -37,19 +37,20 @@ function movePrimedPiece(divId) {
                             }
                         }
                         model.allInPlayPieces[j].possison = divId
+
+
                         if (model.allInPlayPieces[j].id.includes('pawn') == true &&
                             model.allInPlayPieces[j].possison.includes('8') == true) {
-                            console.log(j)
-                            primePawnPromote(j)
+                            
+                            primePawnPromote(model.allInPlayPieces[j].id)
                         }
 
                         if (model.allInPlayPieces[j].id.includes('pawn') == true &&
                             model.allInPlayPieces[j].possison.includes('1') == true) {
-                            primePawnPromote(j)
+                            primePawnPromote(model.allInPlayPieces[j].id)
                         }
+
                         if (model.board[i].currentPiece != '') { capturePiece(i) }
-
-
                         model.board[i].currentPiece = model.allInPlayPieces[j].id
                         model.inputs.currentlyMovingPiece = ''
                         applyColors()
