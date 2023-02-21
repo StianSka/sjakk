@@ -75,14 +75,12 @@ function verticalMoveUp(numberIndex, currentPos, color) {
             indexUp = i;
         }
     }
-    console.log(hasHitPieceUp)
-    console.log(indexUp)
     if (indexUp != 0) {
         if (model.board[indexUp].currentPiece.includes(color) == false && model.board[indexUp].id.includes(numberIndex) == true) {
             model.board[indexUp].color = model.legalMoveSquareColor
         }
     }
-    if (indexUp == 0 && hasHitPieceUp == true){
+    if (indexUp == 0 && hasHitPieceUp == true) {
         if (model.board[indexUp].currentPiece.includes(color) == false && model.board[indexUp].id.includes(numberIndex) == true) {
             model.board[indexUp].color = model.legalMoveSquareColor
         }
