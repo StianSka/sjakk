@@ -1,5 +1,4 @@
-// current bugs kan gå av brettet bør bli fikset at promotering det bør bli pkalt i movePrimedPiece()  
-// i pieceController
+
 function pawnMove() {
     let currentPos = model.inputs.currentlyMovingPiece.possison
     let currentPosIndex = findCurrentPosisonIndex(currentPos)
@@ -91,20 +90,9 @@ function blackPawnCapture(currentPosIndex) {
     }
 }
 
-function primePawnPromote(id) {
-    model.promotionId = id
-    openModal()
-}
-
 function promotePawn(toPiece, imageIndex) {
-    let pawn
-
-    for (let i = 0; i < model.allInPlayPieces.length; i++) {
-        if (model.allInPlayPieces[i].id == model.promotionId) {
-            pawn = model.allInPlayPieces[i]
-        }
-    }
-    pawn.id = pawn.id.replace('pawn', toPiece)
+    let pawn = model.allInPlayPieces[model.lastMovedPieceIndex]
+    model.allInPlayPieces[model.lastMovedPieceIndex].id = pawn.id.replace('pawn', toPiece)
     if (pawn.color == 'black') { pawn.imageLink = model.promoteBlackImg[imageIndex] }
     else { pawn.imageLink = model.promoteWhiteImg[imageIndex] }
     closeModal()

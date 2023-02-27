@@ -2,8 +2,12 @@ const model = {
     //app
     curentPage: 'game',
     colorToMove: 'white',
-    promotionIndex: 0,
+    lastMovedPieceIndex: 0,
     modal: 'none',
+    currentIndexOfWhiteKing: 32,
+    whiteIsInCheck: false,
+    currentIndexOfBlackKing: 39,
+    blackIsInCheck: false,
 
     //inputs
     inputs:
@@ -39,7 +43,6 @@ const model = {
             possison: 'e8',
             color: 'black',
             hasMoved: false,
-            isInCheck: false,
             imageLink: 'img/black king.png',
         },
         {
@@ -147,7 +150,6 @@ const model = {
             possison: 'e1',
             color: 'white',
             hasMoved: false,
-            isInCheck: false,
             imageLink: 'img/white king.png',
         },
         {

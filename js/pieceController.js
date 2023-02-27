@@ -24,6 +24,7 @@ function primePieceToMove(divId) {
     }
 }
 // skriv om det her 
+/*
 function movePrimedPiece(divId) {
     if (model.inputs.currentlyMovingPiece != '' && model.inputs.pieceIsPrimed == false) {
         for (let i = 0; i < model.board.length; i++) {
@@ -63,6 +64,73 @@ function movePrimedPiece(divId) {
             applyColors()
         }
     }
+}
+*/
+function movePrimedPiece(divId) {
+    let clikedSquareIndex = ''
+    if (model.inputs.currentlyMovingPiece != '' && model.inputs.pieceIsPrimed == false) {
+        clikedSquareIndex = findClickedScuare(divId)
+        if (model.board[clikedSquareIndex].color == model.legalMoveSquareColor) {
+            makeMockMove(clikedSquareIndex, divId)
+        }
+        else {
+            model.inputs.currentlyMovingPiece = ''
+            applyColors()
+        }
+    }
+}
+
+//fortsett her 
+function makeMockMove(squareToMoveTo, divId) {
+    let square = squareToMoveTo
+    let squareToEmpty = model.inputs.currentlyMovingPiece.possison
+
+    model.inputs.currentlyMovingPiece.possison = divId
+    if (model.inputs.currentlyMovingPiece.hasMoved != undefined) {
+        model.inputs.currentlyMovingPiece.hasMoved = true
+    }
+    if (model.board[square].currentPiece != '') { capturePiece(square) }
+    model.board[square].currentPiece = model.inputs.currentlyMovingPiece.id
+    checkIfPawn()
+    applyMove(squareToEmpty)
+}
+
+function applyMove(squareToEmpty) {
+    for (let i = 0; i < model.board.length; i++) {
+        if (squareToEmpty == model.board[i].id) {
+            model.board[i].currentPiece = ''
+        }
+
+    }
+    for (let i = 0; i < model.allInPlayPieces.length; i++) {
+        if (model.allInPlayPieces[i].id == model.inputs.currentlyMovingPiece.id) {
+            model.allInPlayPieces[i] = model.inputs.currentlyMovingPiece
+            model.lastMovedPieceIndex = i
+        }
+    }
+    model.inputs.currentlyMovingPiece = ''
+    applyColors()
+}
+
+function checkIfPawn() {
+    if (model.inputs.currentlyMovingPiece.id.includes('pawn') == true &&
+        model.inputs.currentlyMovingPiece.possison.includes('8') == true) {
+            openModal()
+    }
+    if (model.inputs.currentlyMovingPiece.id.includes('pawn') == true &&
+        model.inputs.currentlyMovingPiece.possison.includes('1') == true) {
+            openModal()
+    }
+}
+
+function findClickedScuare(divId) {
+    let square = ''
+    for (let i = 0; i < model.board.length; i++) {
+        if (model.board[i].id == divId) {
+            square = model.board[i].index
+        }
+    }
+    return square
 }
 
 function getPieceType() {
@@ -108,7 +176,6 @@ function capturePiece(index) {
             model.allInPlayPieces.splice(i, 1)
         }
     }
-
 }
 
 function findCurrentPosisonIndex(currentPos) {
