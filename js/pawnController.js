@@ -92,8 +92,17 @@ function blackPawnCapture(currentPosIndex) {
 
 function promotePawn(toPiece, imageIndex) {
     let pawn = model.allInPlayPieces[model.lastMovedPieceIndex]
-    model.allInPlayPieces[model.lastMovedPieceIndex].id = pawn.id.replace('pawn', toPiece)
+    pawn.id = pawn.id.replace('pawn', toPiece)
+    changeSquareCurrentPiece()
     if (pawn.color == 'black') { pawn.imageLink = model.promoteBlackImg[imageIndex] }
     else { pawn.imageLink = model.promoteWhiteImg[imageIndex] }
     closeModal()
+}
+
+function changeSquareCurrentPiece() {
+    for (let i = 0; i < model.board.length; i++) {
+        if (model.board[i].id == model.allInPlayPieces[model.lastMovedPieceIndex].possison) {
+            model.board[i].currentPiece = model.allInPlayPieces[model.lastMovedPieceIndex].id
+        }
+    }
 }

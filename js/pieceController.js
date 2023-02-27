@@ -23,49 +23,7 @@ function primePieceToMove(divId) {
         }
     }
 }
-// skriv om det her 
-/*
-function movePrimedPiece(divId) {
-    if (model.inputs.currentlyMovingPiece != '' && model.inputs.pieceIsPrimed == false) {
-        for (let i = 0; i < model.board.length; i++) {
-            if (model.board[i].color == model.legalMoveSquareColor && model.board[i].id == divId) {
-                for (let j = 0; j < model.allInPlayPieces.length; j++) {
-                    if (model.allInPlayPieces[j].id == model.inputs.currentlyMovingPiece.id) {
-                        for (let k = 0; k < model.board.length; k++) {
-                            if (model.board[k].id == model.allInPlayPieces[j].possison) {
-                                model.board[k].currentPiece = ''
-                                model.allInPlayPieces[j].hasMoved = true
-                            }
-                        }
-                        model.allInPlayPieces[j].possison = divId
 
-
-                        if (model.allInPlayPieces[j].id.includes('pawn') == true &&
-                            model.allInPlayPieces[j].possison.includes('8') == true) {
-                            
-                            primePawnPromote(model.allInPlayPieces[j].id)
-                        }
-
-                        if (model.allInPlayPieces[j].id.includes('pawn') == true &&
-                            model.allInPlayPieces[j].possison.includes('1') == true) {
-                            primePawnPromote(model.allInPlayPieces[j].id)
-                        }
-
-                        if (model.board[i].currentPiece != '') { capturePiece(i) }
-                        model.board[i].currentPiece = model.allInPlayPieces[j].id
-                        model.inputs.currentlyMovingPiece = ''
-                        applyColors()
-                    }
-                }
-            }
-        }
-        if (model.inputs.currentlyMovingPiece != '') {
-            model.inputs.currentlyMovingPiece = ''
-            applyColors()
-        }
-    }
-}
-*/
 function movePrimedPiece(divId) {
     let clikedSquareIndex = ''
     if (model.inputs.currentlyMovingPiece != '' && model.inputs.pieceIsPrimed == false) {
@@ -80,7 +38,6 @@ function movePrimedPiece(divId) {
     }
 }
 
-//fortsett her 
 function makeMockMove(squareToMoveTo, divId) {
     let square = squareToMoveTo
     let squareToEmpty = model.inputs.currentlyMovingPiece.possison
