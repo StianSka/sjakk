@@ -30,7 +30,6 @@ function uppdateViewBoard() {
         
             <li>det som er igjen</li>
             <li>sjekk om konge er i sjakk</li>
-            <li>konge moves </li>
             <li>tur bytte </li>
             <li>on pessant</li>
             <li>eventuelle jukse funksjoner</li>

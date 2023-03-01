@@ -61,6 +61,9 @@ function applyMove(squareToEmpty) {
     }
     for (let i = 0; i < model.allInPlayPieces.length; i++) {
         if (model.allInPlayPieces[i].id == model.inputs.currentlyMovingPiece.id) {
+            if (model.inputs.currentlyMovingPiece.id.includes('king') == true) {
+                changeKingIndex(model.inputs.currentlyMovingPiece.possison)
+            }
             model.allInPlayPieces[i] = model.inputs.currentlyMovingPiece
             model.lastMovedPieceIndex = i
         }
@@ -69,14 +72,22 @@ function applyMove(squareToEmpty) {
     applyColors()
 }
 
+function changeKingIndex(square) {
+    let boardPosIndex = findCurrentPosisonIndex(square)
+    if (model.inputs.currentlyMovingPiece.color == 'black') {
+        model.currentIndexOfBlackKing = boardPosIndex
+    }
+    else {model.currentIndexOfWhiteKing = boardPosIndex}
+}
+
 function checkIfPawn() {
     if (model.inputs.currentlyMovingPiece.id.includes('pawn') == true &&
         model.inputs.currentlyMovingPiece.possison.includes('8') == true) {
-            openModal()
+        openModal()
     }
     if (model.inputs.currentlyMovingPiece.id.includes('pawn') == true &&
         model.inputs.currentlyMovingPiece.possison.includes('1') == true) {
-            openModal()
+        openModal()
     }
 }
 

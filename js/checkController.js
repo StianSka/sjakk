@@ -40,7 +40,7 @@ function lookForCheksDiagonalRightUp(color, posIndex) {
     let i = (posIndex - 7)
     let hasHitPiece = false
     let square = model.board[i].id.charAt(1)
-    while (hasHitPiece == false && i >= 0 && square < 8) {
+    while (hasHitPiece == false && i >= 0 && square <= 8) {
         if (model.board[i].currentPiece != '') {
             if (model.board[i].currentPiece.includes(color) == false) {
                 if (model.board[i].currentPiece.includes('bishop')) {
@@ -54,6 +54,7 @@ function lookForCheksDiagonalRightUp(color, posIndex) {
         }
         square = model.board[i].id.charAt(1)
         console.log(square)
+        if (square == 8) { break }
         i = i - 7
 
     }
