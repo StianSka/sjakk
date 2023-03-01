@@ -39,7 +39,8 @@ function isInCheck() {
 function lookForCheksDiagonalRightUp(color, posIndex) {
     let i = (posIndex - 7)
     let hasHitPiece = false
-    let square = model.board[i].id.charAt(1)
+    let square = 0;
+    if (i > 0) { model.board[i].id.charAt(1) }
     while (hasHitPiece == false && i >= 0 && square <= 8) {
         if (model.board[i].currentPiece != '') {
             if (model.board[i].currentPiece.includes(color) == false) {
@@ -53,7 +54,6 @@ function lookForCheksDiagonalRightUp(color, posIndex) {
             hasHitPiece = true
         }
         square = model.board[i].id.charAt(1)
-        console.log(square)
         if (square == 8) { break }
         i = i - 7
 
@@ -61,25 +61,9 @@ function lookForCheksDiagonalRightUp(color, posIndex) {
 }
 
 
-function lookForCheksLeft(color, posIndex, currentLetter) {
-    let i = (posIndex - 1)
-    let hasHitPiece = false
-    while (hasHitPiece == false && model.board[i].id.includes(currentLetter) == true) {
-        if (model.board[i].currentPiece != '') {
-            if (model.board[i].currentPiece.includes(color) == false) {
-                if (model.board[i].currentPiece.includes('rook')) {
-                    setKingInCheck(color)
-                }
-                if (model.board[i].currentPiece.includes('queen')) {
-                    setKingInCheck(color)
-                }
-            }
-            hasHitPiece = true
-        }
-        i--
-    }
 
-}
+
+
 
 function lookForCheksRight(color, posIndex, currentLetter) {
     let i = (posIndex + 1)
